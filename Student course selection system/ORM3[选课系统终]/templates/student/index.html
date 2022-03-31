@@ -1,0 +1,151 @@
+{% extends "student/base.html" %}
+
+
+{% block style %}
+    <style>
+        .file {
+            position: absolute;
+            left: 850px;
+            top: 19px;
+        }
+
+        .submit-btn {
+            position: absolute;
+            left: 200px;
+            top: 0;
+        }
+
+    </style>
+{% endblock style %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="file">
+                        <form action="/student/stu_excel/" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" name="excel_file">
+                            <input type="submit" class="submit-btn" value="添加">
+                        </form>
+                    </div>
+                    <h4 style="display: inline-block">学生信息</h4>
+                    <span style="position:absolute;right: 500px">
+                        <form action="/student/select/" method="get" enctype="application/x-www-form-urlencoded"
+                              style="display: inline-block">
+
+                        <span>
+                            <input name="key_word" value="{{ key_word }}" type="text" style="width: 200px;height: 34px">
+                            <select name="select_way" id="" class="btn btn-md btn-info">
+                                <option value="follow_name">按姓名查询</option>
+                                <option value="follow_class">按班级查询</option>
+                            </select>
+                           <button class="btn btn-md btn-info">查询</button>
+                        </span>
+                        </form>
+                    </span>
+                    <button class="btn btn-md btn-info" style="float:right;position: absolute;right: 120px;"><a
+                            href="{% url "add_student" %}"
+                            style="text-decoration: none;color: white">添加学生</a>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>姓名</th>
+                                <th>年龄</th>
+                                <th>性别</th>
+                                <th>生日</th>
+                                <th>班级</th>
+                                <th>已选课程</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for student in student_list %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.age }}</td>
+                                    <td>{% if student.sex == 1 %}
+                                        <span>男</span>
+                                    {% else %}
+                                        <span>女</span>
+                                    {% endif %} </td>
+                                    <td>{{ student.birthday|date:"Y-m-d" }}</td>
+                                    <td>{{ student.clas.name }}</td>
+                                    <td>
+                                        {% if not student.courses.all %}
+                                            <span>暂时无选修课程</span>
+                                        {% else %}
+                                            {% for student in student.courses.all %}
+                                                <button class="btn btn-sm btn-success">{{ student }}</button>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-md btn-warning"><a
+                                                href="/student/update/{{ student.id }}"
+                                                style="text-decoration: none;color:white;;">编辑</a>
+                                        </button>
+                                        <button class="btn btn-md btn-danger"><a href="/student/delete/{{ student.id }}"
+                                                                                 style="text-decoration: none;color:white;">删除</a>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="Page navigation" style="position: absolute;bottom: -16px;left: 530px">
+
+                        <ul class="pagination">
+                            <li style="border: 1px #6c757d solid"><a href="/student/?page=1" aria-label="" class="btn btn-sm"><span aria-hidden="true">First</span></a>
+                            </li>
+                            {% if tip1 == "..." %}
+                                <li class="disabled"><a href="#" aria-label=""><span
+                                        aria-hidden="true">{{ tip1 }}</span></a>
+                                </li>
+                            {% else %}
+                                <li class="disabled" style="display: none"><a href="#" aria-label=""><span
+                                        aria-hidden="true"></span></a>
+                                </li>
+                            {% endif %}
+
+                            {% for page in page_range %}
+                                {% if page == page_num %}
+
+                                    <li style="border: 1px #6c757d solid"><a href="/student/?page={{ page }}" class="btn btn-sm btn-info" >{{ page }}</a></li>
+
+                                {% else %}
+                                    <li style="border: 1px #6c757d solid"><a href="/student/?page={{ page }}" class="btn btn-sm">{{ page }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if tip2 == "..." %}
+                                <li class="disabled"><a href="#" aria-label=""><span
+                                        aria-hidden="true">{{ tip2 }}</span></a>
+                                </li>
+                            {% else %}
+                                <li class="disabled" style="display: none"><a href="#" aria-label=""><span
+                                        aria-hidden="true"></span></a>
+                                </li>
+                            {% endif %}
+                            <li style="border: 1px #6c757d solid"><a href="/student/?page={{ num_pages }}" aria-label="" class="btn btn-sm"><span
+                                    aria-hidden="true">End</span></a>
+
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock content %}

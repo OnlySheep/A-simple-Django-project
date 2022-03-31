@@ -1,0 +1,66 @@
+{% extends "student/base.html" %}
+{% block content %}
+    <div style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.17sucai.com%2Fupload%2F18693%2F2013-07-31%2F89d2029ffbff694503f7526b08262fca.png%3Fx-oss-process%3Dstyle%2Fpri&refer=http%3A%2F%2Fimg.17sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1650609258&t=48efe941c74f6480c6038d912ac6895e');width: 2000px;height: 800px;">
+        <div class="container" style="position: absolute;top: 150px;left: 250px">
+
+            <form action="/student/update2/{{ course.id }}" method="post" enctype="application/x-www-form-urlencoded">
+                {% csrf_token %}
+                <h4 style="color: white;display: inline-block">修改课程</h4><span style="color: red">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ tips }}</span>
+                <div class="row">
+                    <div class="input-group col-md-5">
+
+                <span class="input-group-addon" id="sizing-addon2"
+                      style="text-align: center;line-height: 40px;color: white">课程：</span>
+                        <input value="{{ course.title }}" type="text" name="title" class="form-control"
+                               placeholder="请输入课程名称(必填)"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-5">
+
+                <span class="input-group-addon" id="sizing-addon2"
+                      style="text-align: center;line-height: 40px;color: white">讲师：</span>
+                        <input value="{{ course.teacher }}" type="text" name="teacher" class="form-control"
+                               placeholder="请输入讲师(必填)"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-5">
+                        <span class="input-group-addon" id="sizing-addon2"
+                              style="text-align: center;line-height: 40px;color: white">学分：</span>
+                        <input value="{{ course.credit }}" type="text" name="credit" class="form-control"
+                               placeholder="请输入学分(必填)"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-5">
+                        <span class="input-group-addon" id="sizing-addon2"
+                              style="text-align: center;line-height: 40px;color: white">时间：</span>
+                        <input value="{{ course.classTime }}" type="text" name="classTime" class="form-control"
+                               placeholder="请输入时间"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-5">
+                        <span style="text-align: center;line-height: 40px;color: white">教室：</span>
+                        <input value="{{ course.classAddr }}" type="text" name="classAddr" class="form-control"
+                               placeholder="请输入教室"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <button class="btn btn-success btn-lg" style="position: absolute;left: 230px">提交</button>
+
+            </form>
+        </div>
+    </div>
+{% endblock content %}

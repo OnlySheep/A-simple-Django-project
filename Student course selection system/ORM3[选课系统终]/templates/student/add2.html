@@ -1,0 +1,32 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+    <div class="body"
+         style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.17sucai.com%2Fupload%2F18693%2F2013-07-31%2F89d2029ffbff694503f7526b08262fca.png%3Fx-oss-process%3Dstyle%2Fpri&refer=http%3A%2F%2Fimg.17sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1650609258&t=48efe941c74f6480c6038d912ac6895e');width: 2000px;height: 800px;">
+        <h4 style="color: white;position:absolute;top: 203px;left: 366px">请添加课程：</h4>
+        <span
+            style="color: red;position:absolute;top: 200px;left: 450px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ tips }}
+        </span>
+        <div class="container" style="position: absolute;top: 230px;left: 350px">
+            <form action="/student/add2/" method="post" enctype="application/x-www-form-urlencoded">
+                {% csrf_token %}
+                <p><span style="color: white">课程：</span><input type="text" name="title" placeholder="请输入课程名(必填)"
+                                                               aria-describedby="sizing-addon2"
+                                                               style="width: 500px; height: 50px"></p>
+                <p><span style="color: white">讲师：</span><input type="text" name="teacher" placeholder="请输入讲师(必填)"
+                                                               aria-describedby="sizing-addon2"
+                                                               style="width: 500px; height: 50px"></p>
+                <p><span style="color: white">学分：</span><input type="text" name="credit" placeholder="请输入学分(必填)"
+                                                               aria-describedby="sizing-addon2"
+                                                               style="width: 500px; height: 50px"></p>
+                <p><span style="color: white">时间：</span><input type="text" name="classTime" placeholder="请输入时间"
+                                                               aria-describedby="sizing-addon2"
+                                                               style="width: 500px; height: 50px"></p>
+                <p><span style="color: white">教室：</span><input type="text" name="classAddr" placeholder="请输入教室"
+                                                               aria-describedby="sizing-addon2"
+                                                               style="width: 500px; height: 50px"></p>
+                <button class="btn btn-lg btn-primary" style="position:absolute;left: 455px;top: 350px">提交</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
