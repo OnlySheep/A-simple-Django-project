@@ -1,0 +1,44 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+    <h1 style="color: red;position: absolute;top: 150px;left: 215px">您确定要删除学生{{ student.name }}吗？</h1>
+    <div class="container" style="position: absolute;top: 200px;left: 200px">
+        <div class="row">
+            <form action="/student/delete/{{ student.id }}" method="post" enctype="application/x-www-form-urlencoded"
+                  class="col-md-8">
+                {% csrf_token %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>年龄</th>
+                            <th>性别</th>
+                            <th>生日</th>
+                            <th>班级</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.age }}</td>
+                            <td>{% if student.sex == 1 %}
+                                <span>男</span>
+                            {% else %}
+                                <span>女</span>
+                            {% endif %} </td>
+                            <td>{{ student.birthday|date:"Y-d-m" }}</td>
+                            <td>{{ student.clas.name }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-md btn-danger" style="display: inline-block;position:absolute;right: 120px">
+                    确定删除
+                </button>
+                <a href="/student/" class="btn btn-md btn-success"
+                   style="display: inline-block;position:absolute;right: 16px">取消删除</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

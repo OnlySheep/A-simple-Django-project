@@ -1,0 +1,76 @@
+{% extends "student/base.html" %}
+{% block content %}
+    <div class="body"
+         style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.17sucai.com%2Fupload%2F18693%2F2013-07-31%2F89d2029ffbff694503f7526b08262fca.png%3Fx-oss-process%3Dstyle%2Fpri&refer=http%3A%2F%2Fimg.17sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1650609258&t=48efe941c74f6480c6038d912ac6895e');width: 2000px;height: 800px;">
+        <div class="container" style="position: absolute;top: 230px;left: 350px">
+
+            <form action="/student/add/" method="post" enctype="application/x-www-form-urlencoded">
+                {% csrf_token %}
+                <h4 style="color: white;display: inline-block">请添加学生</h4><span style="color: red">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ tips }}</span>
+                <div class="row">
+                    <div class="input-group col-md-5">
+
+                <span class="input-group-addon" id="sizing-addon2"
+                      style="text-align: center;line-height: 40px;color: white">姓名：</span>
+                        <input type="text" name="name" class="form-control" placeholder="请输入学生姓名"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-5">
+
+                <span class="input-group-addon" id="sizing-addon2"
+                      style="text-align: center;line-height: 40px;color: white">年龄：</span>
+                        <input type="text" name="age" class="form-control" placeholder="请输入学生年龄"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-5">
+
+                <span class="input-group-addon" id="sizing-addon2"
+                      style="text-align: center;line-height: 40px;color: white">性别：
+
+                    <span style="color: black">男&nbsp&nbsp&nbsp</span><input type="radio" name="sex" value="1"
+                                                                             aria-describedby="sizing-addon2">
+                    <span style="color: black">&nbsp&nbsp&nbsp&nbsp&nbsp女&nbsp&nbsp&nbsp</span><input type="radio"
+                                                                                                      name="sex"
+                                                                                                      value="0"
+                                                                                                      aria-describedby="sizing-addon2"></span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-5">
+
+                <span class="input-group-addon" id="sizing-addon2"
+                      style="text-align: center;line-height: 40px;color: white">生日：</span>
+                        <input type="date" name="birthday" placeholder="格式如：2000-11-19"
+                               aria-describedby="sizing-addon2">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-group col-md-7">
+                        <span style="text-align: center;line-height: 40px;color: white">班级：</span>
+                        <select name="clas_id" id="">
+                            {% for clas in clas_list %}
+                                <option value="{{ clas.id }}">{{ clas.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <button class="c1 btn btn-success">提交</button>
+
+            </form>
+        </div>
+    </div>
+    <script>
+        $(".c1").on("click", function () {
+            alert("添加成功！")
+        })
+    </script>
+{% endblock %}
