@@ -7,6 +7,8 @@ python == 3.8.7
 
 django == 3.2
 
+Html＋CSS＋JavaScript
+
 db.sqlit3数据库
 
 本地访问：127.0.0.1:8800
